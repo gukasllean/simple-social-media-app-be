@@ -19,6 +19,8 @@ import { AppService } from './app.service';
         password: configService.get<string>('POSTGRES_PASSWORD'),
         username: configService.get<string>('POSTGRES_USER'),
         database: configService.get<string>('POSTGRES_DATABASE'),
+        migrations: ['src/migrations/**/*{.ts,.js}'],
+        ssl: true,
       }),
     }),
   ],
