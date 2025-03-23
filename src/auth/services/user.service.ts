@@ -14,4 +14,18 @@ export class UserService {
     const user = this.userRepository.findOne({ where: { email } });
     return user;
   }
+
+  async findByEmailAndUsername(
+    email: string,
+    username: string,
+  ): Promise<User | null> {
+    const user = this.userRepository.findOne({
+      where: [{ email }, { username }],
+    });
+    return user;
+  }
+
+  async save(user: User): Promise<User> {
+    return this.userRepository.save(user);
+  }
 }
