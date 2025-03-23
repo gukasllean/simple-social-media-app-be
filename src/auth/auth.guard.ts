@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest<Request>();
 
     // Skip public api
-    if (['/auth/login', 'auth/register'].includes(request.url)) {
+    if (['/auth/login', '/auth/register'].includes(request.url)) {
       return true;
     }
     const token = this.extractTokenFromHeader(request);
