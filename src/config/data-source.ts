@@ -4,8 +4,6 @@ import { DataSource } from 'typeorm';
 ConfigModule.forRoot();
 const configService = new ConfigService();
 
-
-
 export default new DataSource({
   type: 'postgres',
   host: configService.get<string>('POSTGRES_HOST'),
