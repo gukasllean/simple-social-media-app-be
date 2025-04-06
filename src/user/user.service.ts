@@ -15,7 +15,7 @@ export class UserService {
     return user;
   }
 
-  async findByEmailAndUsername(
+  async findByEmailOrUsername(
     email: string,
     username: string,
   ): Promise<User | null> {

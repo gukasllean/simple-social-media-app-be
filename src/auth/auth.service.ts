@@ -35,7 +35,7 @@ export class AuthService {
 
   async register(registerDto: RegisterDTO) {
     const existedUser: User | null =
-      await this.userService.findByEmailAndUsername(
+      await this.userService.findByEmailOrUsername(
         registerDto.email,
         registerDto.username,
       );
