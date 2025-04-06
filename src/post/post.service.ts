@@ -13,8 +13,19 @@ export class PostService {
     return this.postRepository.save(user);
   }
 
-  async findByUserId(userId: number): Promise<Posts[]> {
-    return await this.postRepository.findBy({ user_id: userId });
+  async findByUserId(
+    userId: number,
+    page: number,
+    limit: number,
+  ): Promise<Posts[]> {
+    return await this.postRepository.find({
+      where: { user_id: userId },
+      skip: (page - 1) * limit,
+      take: limit,
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
 
   async findByUserIdAndPostId(userId: number, postId: number): Promise<Posts> {

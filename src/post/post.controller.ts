@@ -7,13 +7,14 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Req,
 } from '@nestjs/common';
 import { JwtPayloadDto } from 'src/auth/dto/jwt-payload.dto';
 import { CreatePostDTO } from './create-post.dto';
 import { PostService } from './post.service';
 import { Posts } from './posts.entity';
-import { ApiParam } from '@nestjs/swagger';
+import { ApiParam, ApiQuery } from '@nestjs/swagger';
 
 @Controller('post')
 export class PostController {
@@ -30,9 +31,15 @@ export class PostController {
   }
 
   @Get()
-  async findAll(@Req() request: Request): Promise<Posts[]> {
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 10 })
+  async findAll(
+    @Req() request: Request,
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ): Promise<Posts[]> {
     const userJwtPayload: JwtPayloadDto = request['user'];
-    return await this.postService.findByUserId(userJwtPayload.sub);
+    return await this.postService.findByUserId(userJwtPayload.sub, page, limit);
   }
 
   @Get(':id')
