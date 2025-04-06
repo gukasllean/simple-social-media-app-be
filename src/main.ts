@@ -12,8 +12,8 @@ async function bootstrap() {
     .addBearerAuth()
     .addSecurityRequirements('bearer')
     .build();
-    const document = SwaggerModule.createDocument(app, config);
-    // Serve raw OpenAPI JSON
+  const document = SwaggerModule.createDocument(app, config);
+  // Serve raw OpenAPI JSON
   app.use('/api/swagger-json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(document);
