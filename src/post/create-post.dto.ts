@@ -12,7 +12,6 @@ export class CreatePostDTO {
   @ApiProperty()
   content: string;
 
-  @IsString()
   @ApiProperty()
   imageUrl: string;
 }
